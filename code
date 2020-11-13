@@ -1,0 +1,92 @@
+using System;
+using System.Collections.Generic;
+
+namespace ConsoleApp5
+{
+    
+    class Program
+    {
+
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Numero: ");
+            for (bool parar = false; parar != true;)
+            {
+                string numerostring = Console.ReadLine();
+                char[] digitosstringarray = numerostring.ToCharArray();
+                int numerofinal = 0;
+                if(numerostring == "0")
+                {
+                    parar = true;
+                    return;
+                }
+                    
+                List<char> digits = new List<char>();
+                for (int i = 0; i < digitosstringarray.Length; i++)
+                {
+                    digits.Add((numerostring[i]));
+                }
+                digits.Reverse();
+                int[] digitsArray = new int[digits.Count]; //digits.ToArray();
+                for (int i = 0; i < digits.Count; i++)
+                {
+                    digitsArray[i] = Convert.ToInt32(digits[i])-48;
+                }
+                
+                for (int i = 1; i < digitsArray.Length; i++)
+                {
+                    if((i+1) % 2 == 0)
+                    {
+                        numerofinal += digitsArray[i] * 3;
+                    }
+                    else
+                    {
+                        numerofinal += digitsArray[i] * 1;
+                    }
+                }
+
+                string pais = "";
+                if (numerostring.Length == 13)
+                {
+                    if(digitsArray[12] == 0)
+                    {
+                        pais = " EEUU";
+                    }
+                    else if(digitsArray[11] == 0 && digitsArray[12] == 5)
+                    {
+                        pais = " Inglaterra";
+                    }
+                    else if(digitsArray[11] == 0 && digitsArray[12] == 7)
+                    {
+                        pais = " Noruega";
+                    }
+                    else
+                    {
+                        int primerosDigitos = digitsArray[12] * 100 + digitsArray[11] * 10 + digitsArray[10];
+                        if(primerosDigitos == 380)
+                        {
+                            pais = "Bulgaria";
+                        }
+                        else if(primerosDigitos == 539)
+                        {
+                            pais = "Irlanda";
+                        }
+                        //La lista...
+                    }
+                }
+
+
+                if ((numerofinal+digitsArray[0])%10 == 0)
+                {
+                    Console.WriteLine("SI"+pais);
+                }
+                else
+                {
+                    Console.WriteLine("NO");
+                }
+            }
+        }
+
+
+    }
+}
